@@ -1,0 +1,12 @@
+
+<div class="container">
+    <h2 class="product-heading">Products</h2>
+    <div class="row">
+        <ng-container *ngFor="let product of dummyData; let i = index">
+            <div *ngIf="product" class="col" style="margin-bottom: 50px;">
+                <app-product-card [product]="product"></app-product-card>
+            </div>
+            <div *ngIf="(i + 1) % 3 == 0" class="w-100"></div>
+        </ng-container>        
+    </div>
+</div>
