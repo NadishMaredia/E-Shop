@@ -5,31 +5,31 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul *ngIf="this.accountService.currentUser$ | async" class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Product</a>
         </li>
-        <!-- <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+            Welcome user
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" (click)="logout()">Log out</a>
           </div>
-        </li> -->
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="email" placeholder="Email">
-        <input class="form-control mr-sm-2" type="password" placeholder="Passowrd">
+      <form *ngIf="(this.accountService.currentUser$ | async) === null" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" name="email" [(ngModel)]="model.email" type="email" placeholder="Email">
+        <input class="form-control mr-sm-2" name="password" [(ngModel)]="model.password" type="password" placeholder="Passowrd">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
       </form>
     </div>
